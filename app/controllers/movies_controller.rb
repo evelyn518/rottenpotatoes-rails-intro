@@ -8,7 +8,6 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    @sort_by == "title"
     @ratings_to_show = []
     redirect = false
     logger.debug(session.inspect)
@@ -20,12 +19,12 @@ class MoviesController < ApplicationController
       @sort_by = session[:sort_by]
       redirect = true
     else
-      @sort_by = nil
+      @sort_by = {}
     end
 
     if params[:commit] == "Refresh" and params[:ratings].nil?
-      @ratings = nil
-      session[:ratings] = nil
+      @ratings = {}
+      session[:ratings] = {}
     elsif params[:ratings]
       @ratings = params[:ratings]
       session[:ratings] = params[:ratings]
@@ -33,7 +32,7 @@ class MoviesController < ApplicationController
       @ratings = session[:ratings]
       redirect = true
     else
-      @ratings = nil
+      @ratings = {}
     end
 
     if redirect
@@ -51,9 +50,6 @@ class MoviesController < ApplicationController
       @movies = Movie.all
     end
 
-    if !@ratings
-      @ratings = {}
-    end
   end
 
   def new
