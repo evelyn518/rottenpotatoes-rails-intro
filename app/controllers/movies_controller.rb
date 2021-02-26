@@ -19,12 +19,12 @@ class MoviesController < ApplicationController
       @sort_by = session[:sort_by]
       redirect = true
     else
-      @sort_by = {}
+      @sort_by = nil
     end
 
     if params[:commit] == "Refresh" and params[:ratings].nil?
-      @ratings = {}
-      session[:ratings] = {}
+      @ratings = nil
+      session[:ratings] = nil
     elsif params[:ratings]
       @ratings = params[:ratings]
       session[:ratings] = params[:ratings]
@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
       @ratings = session[:ratings]
       redirect = true
     else
-      @ratings = {}
+      @ratings = nil
     end
 
     if redirect
@@ -49,6 +49,7 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+    @ratings = {} if @ratings == nil
 
   end
 
