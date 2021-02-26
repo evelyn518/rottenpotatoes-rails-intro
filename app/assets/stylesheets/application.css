@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.hilite {
+background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+  background-color: yellow;
+}
